@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'trans_providers',
     'api',
+    'rest_framework',
+    'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +79,19 @@ WSGI_APPLICATION = 'mozio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # https://stackoverflow.com/a/21317596/536214
+        #  'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'moziodb',
+        'USER': 'moziouser',
+        'PASSWORD': 'moziouser',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
