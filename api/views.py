@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.views import APIView
+from rest_framework import exceptions
 from trans_providers.models import TransportProvider, ServiceArea
 from . serializers import TransportProviderSerializer, ServiceAreaSerializer
-from django.contrib.gis.geos import Point, Polygon
 
 
 class TransportProviderViewSet(viewsets.ModelViewSet):
@@ -34,4 +33,5 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
                     'Invalid lat/lng: %s' % e)
             queryset = queryset.filter(
                 area_polygon__contains=point)
-        return queryset
+            return queryset
+        return
