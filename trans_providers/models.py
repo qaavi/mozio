@@ -10,7 +10,6 @@ class TransportProvider(models.Model):
     email = models.CharField(max_length=60)
     phone_no = models.CharField(max_length=16)
     lang = models.CharField(max_length=4)
-    # https://github.com/django-money/django-money
     currency = models.CharField(max_length=10)
 
     class Meta:
@@ -22,8 +21,6 @@ class ServiceArea(models.Model):
     area_id = models.UUIDField
     name = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
-    # https://docs.djangoproject.com/en/2.2/ref/contrib/gis/db-api/
-    # https://docs.djangoproject.com/en/2.2/ref/contrib/gis/geos/
     area_polygon = geomodels.PolygonField()
     transport_provider = models.ForeignKey(
         TransportProvider, on_delete=models.CASCADE, related_name='service_areas')

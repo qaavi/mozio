@@ -1,15 +1,18 @@
 from trans_providers.models import TransportProvider, ServiceArea
 from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 
-# HyperlinkedModelSerializer
-class TransportProviderSerializer(serializers.ModelSerializer):
+class TransportProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TransportProvider
         fields = ['name', 'email', 'phone_no', 'lang', 'currency']
 
 
-class ServiceAreaSerializer(serializers.ModelSerializer):
+class ServiceAreaSerializer(GeoFeatureModelSerializer):
+    transport_provider = TransportProviderSerializer(read_only=True)
+
     class Meta:
         model = ServiceArea
-        fields = '__all__'
+        geo_field = "area_polygon"
+        fields = ('id', 'name', 'transport_provider', 'price')

@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ServiceArea',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('price', models.IntegerField(default=0)),
                 ('area_polygon', django.contrib.gis.db.models.fields.PolygonField(srid=4326)),
@@ -29,7 +30,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TransportProvider',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('email', models.CharField(max_length=60)),
                 ('phone_no', models.CharField(max_length=16)),
@@ -44,6 +46,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='servicearea',
             name='transport_provider',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='service_areas', to='trans_providers.TransportProvider'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='service_areas', to='trans_providers.TransportProvider'),
         ),
     ]
